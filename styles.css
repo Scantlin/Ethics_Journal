@@ -1,13 +1,13 @@
 :root {
-    --primary: #2C3E50;
+    --primary: #141516;
     --primary-dark: #1A252F;
-    --accent: #E67E22;
+    --accent: #f00000;
     --accent-light: #F39C12;
     --text: #030303;
     --text-light: #212324;
-    --background: #e5eef7;
+    --background: #c2bfbf;
     --white: #FFFFFF;
-    --border: #E9ECEF;
+    --border: #000000;
     --success: #27AE60;
     --warning: #F39C12;
     --danger: #E74C3C;
@@ -15,13 +15,14 @@
     --shadow-md: 0 4px 6px rgba(0,0,0,0.05);
     --shadow-lg: 0 10px 15px rgba(0,0,0,0.03);
     --shadow-hover: 0 20px 25px -5px rgba(0,0,0,0.05), 0 10px 10px -5px rgba(0,0,0,0.02);
-    --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 body {
@@ -30,6 +31,282 @@ body {
     color: var(--text);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%238b4513' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.stage-icon.completed {
+    background: var(--success);
+    border-color: var(--success);
+    color: rgb(247, 3, 3);
+    box-shadow: 0 8px 20px rgba(159, 126, 107, 0.3);
+}
+
+.stage-icon.completed i {
+    color: rgb(228, 7, 7);
+}
+
+/* Simple Academic Progress */
+.academic-progress {
+    margin: 3rem 0 1.5rem;
+}
+
+.progress-container {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 1.8rem;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+}
+
+.progress-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 1.8rem;
+    text-align: center;
+}
+
+/* Progress Stages */
+.progress-stages {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 2rem;
+    padding: 0.5rem 0;
+}
+
+.progress-stages::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    background: var(--border);
+    z-index: 1;
+}
+
+.progress-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    flex: 1;
+}
+
+/* Stage Icons */
+.stage-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--white);
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    color: var(--text-light);
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.stage-icon.completed {
+    background: #9f8b7c;
+    border-color: #9f8b7c;
+    color: rgb(0, 0, 0);
+}
+
+.stage-icon.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: rgb(0, 0, 0);
+}
+
+.stage-icon.locked {
+    background: var(--background);
+    border-color: var(--border);
+    color: #cc4e06;
+}
+
+.stage-name {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+}
+
+.stage-date {
+    font-size: 0.7rem;
+    color: var(--text-light);
+    background: var(--background);
+    padding: 0.2rem 0.6rem;
+    border-radius: 100px;
+}
+
+/* Simple Progress Summary */
+.progress-summary {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.summary-stats {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.summary-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-value {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--primary);
+    line-height: 1.2;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--text-light);
+}
+
+/* Simple Progress Bar */
+.progress-bar-container {
+    flex: 1;
+    min-width: 200px;
+}
+
+.progress-bar-wrapper {
+    height: 6px;
+    background: var(--background);
+    border-radius: 100px;
+    overflow: hidden;
+    margin-bottom: 0.3rem;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 100px;
+    width: 50%;
+    transition: width 0.3s ease;
+}
+
+.progress-percentage {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--text-light);
+}
+
+.percentage-value {
+    font-weight: 600;
+    color: var(--accent);
+}
+
+/* Simple Next Milestone */
+.next-milestone {
+    background: var(--background);
+    border-radius: 100px;
+    padding: 0.5rem 1.2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid var(--border);
+    margin-top: 1rem;
+    font-size: 0.85rem;
+}
+
+.next-milestone i {
+    color: var(--accent);
+    font-size: 0.9rem;
+}
+
+.milestone-date {
+    background: var(--white);
+    padding: 0.2rem 0.8rem;
+    border-radius: 100px;
+    font-size: 0.7rem;
+    color: var(--accent);
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .progress-stages {
+        flex-direction: column;
+        gap: 1rem;
+        padding-left: 1.5rem;
+    }
+    
+    .progress-stages::before {
+        left: 20px;
+        right: auto;
+        top: 10px;
+        bottom: 10px;
+        width: 2px;
+        height: auto;
+    }
+    
+    .progress-stage {
+        flex-direction: row;
+        gap: 1rem;
+        width: 100%;
+    }
+    
+    .stage-icon {
+        margin-bottom: 0;
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+    
+    .stage-info {
+        text-align: left;
+    }
+    
+    .progress-summary {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .summary-stats {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .progress-container {
+        padding: 1.2rem;
+    }
+    
+    .progress-title {
+        font-size: 1.3rem;
+    }
+    
+    .summary-stats {
+        gap: 1rem;
+    }
+    
+    .stat-value {
+        font-size: 1.2rem;
+    }
+    
+    .next-milestone {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
 }
 
 /* Navigation */
@@ -751,6 +1028,86 @@ body {
     opacity: 0.8;
 } */
 
+/* Academic Progress */
+.academic-progress {
+    margin-top: 40px;
+}
+
+.progress-container {
+    background-color: white;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.progress-title {
+    font-size: 1.4rem;
+    color: var(--prelim-color);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.progress-stages {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.progress-stages::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 10%;
+    right: 10%;
+    height: 4px;
+    background-color: #eee;
+    z-index: 1;
+}
+
+.progress-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    flex: 1;
+}
+
+.stage-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+    color: #e40808;
+    font-size: 1.2rem;
+}
+
+.stage-icon.active {
+    background-color: var(--prelim-color);
+    color: rgb(241, 3, 3);
+}
+
+.stage-icon.locked {
+    background-color: #f5f5f5;
+    color: #ccc;
+}
+
+.stage-name {
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.stage-name.active {
+    color: var(--prelim-color);
+}
+
+
 /* Responsive */
 @media (max-width: 1024px) {
     .hero-title {
@@ -796,6 +1153,37 @@ body {
     }
     
     .locked-terms {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .term-tab {
+        flex: 1 0 100%;
+    }
+    
+    .entry-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .book-meta {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .progress-stages {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+    
+    .progress-stages::before {
+        display: none;
+    }
+    
+    .images-container {
         grid-template-columns: 1fr;
     }
 }
