@@ -12,17 +12,17 @@ document.addEventListener('DOMContentLoaded', function() {
         markers.forEach(marker => marker.classList.remove('active'));
         
         // Add active class to midterm section and marker
-        const midtermSection = document.getElementById('midterm-section');
-        const midtermMarker = document.querySelector('.timeline-marker[data-term="midterm"]');
+        const midtermSection = document.getElementById('prefinal-section');
+        const midtermMarker = document.querySelector('.timeline-marker[data-term="prefinal"]');
         
         if (midtermSection) midtermSection.classList.add('active');
         if (midtermMarker) midtermMarker.classList.add('active');
         
         // Update progress bar to 50% (midterm)
-        if (progressBar) progressBar.style.width = '50%';
+        if (progressBar) progressBar.style.width = '75%';
         
         // Update progress stages with both Prelim and Midterm as completed
-        updateProgressStagesWithBothCompleted('midterm');
+        updateProgressStagesWithBothCompleted('prefinal');
     }
 
     // Update progress stages with both Prelim and Midterm always completed
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const statValues = document.querySelectorAll('.summary-stat .stat-value');
         
         // ALWAYS mark Prelim and Midterm as completed, regardless of active term
-        const alwaysCompleted = ['prelim', 'midterm'];
+        const alwaysCompleted = ['prelim', 'midterm', 'prefinal'];
         
         const termOrder = ['prelim', 'midterm', 'prefinal', 'final'];
         const currentIndex = termOrder.indexOf(activeTerm);
@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (stageDate) {
                     if (termName === 'prelim') stageDate.textContent = 'Completed (Jan-Feb)';
                     else if (termName === 'midterm') stageDate.textContent = 'Completed (Feb-Mar)';
+                    else if (termName === 'prefinal') stageDate.textContent = 'Completed (April)';
                 }
             } 
             // For Prefinal and Final, check if they should be active or locked
