@@ -12,17 +12,17 @@ document.addEventListener('DOMContentLoaded', function() {
         markers.forEach(marker => marker.classList.remove('active'));
         
         // Add active class to midterm section and marker
-        const midtermSection = document.getElementById('prefinal-section');
-        const midtermMarker = document.querySelector('.timeline-marker[data-term="prefinal"]');
+        const midtermSection = document.getElementById('final-section');
+        const midtermMarker = document.querySelector('.timeline-marker[data-term="final"]');
         
         if (midtermSection) midtermSection.classList.add('active');
         if (midtermMarker) midtermMarker.classList.add('active');
         
         // Update progress bar to 50% (midterm)
-        if (progressBar) progressBar.style.width = '75%';
+        if (progressBar) progressBar.style.width = '100%';
         
         // Update progress stages with both Prelim and Midterm as completed
-        updateProgressStagesWithBothCompleted('prefinal');
+        updateProgressStagesWithBothCompleted('final');
     }
 
     // Update progress stages with both Prelim and Midterm always completed
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const statValues = document.querySelectorAll('.summary-stat .stat-value');
         
         // ALWAYS mark Prelim and Midterm as completed, regardless of active term
-        const alwaysCompleted = ['prelim', 'midterm', 'prefinal'];
+        const alwaysCompleted = ['prelim', 'midterm', 'prefinal', 'final'];
         
         const termOrder = ['prelim', 'midterm', 'prefinal', 'final'];
         const currentIndex = termOrder.indexOf(activeTerm);
@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (termName === 'prelim') stageDate.textContent = 'Completed (Jan-Feb)';
                     else if (termName === 'midterm') stageDate.textContent = 'Completed (Feb-Mar)';
                     else if (termName === 'prefinal') stageDate.textContent = 'Completed (April)';
+                    else if (termName === 'final') stageDate.textContent = 'Completed (June)';
                 }
             } 
             // For Prefinal and Final, check if they should be active or locked
@@ -98,8 +99,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // Update summary stats - always show 2 completed (Prelim, Midterm)
-        if (statValues.length >= 3) {
-            const completedCount = 2; // Always 2 (Prelim and Midterm)
+        if (statValues.length >= 4) {
+            const completedCount = 3; // Always 2 (Prelim and Midterm)
             
             // Determine inProgress and locked based on active term
             let inProgressCount = 0;
@@ -196,11 +197,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Enhanced captions
         const captions = {
-            '1': 'Words associated with justice from our class discussion',
-            '2': 'Exploring the importance of justice in society',
-            '3': 'A moment captured during our Ethics session',
-            '4': 'Finding humor even in serious topics',
-            '5': 'Personal reflection on standing up for what is right'
+            '1': '',
+            '2': '',
+            '3': '',
+            '4': '',
+            '5': ''
         };
 
         galleryItems.forEach(item => {
@@ -209,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const id = this.dataset.id;
                 
                 modalImg.src = img.src;
-                modalCaption.textContent = captions[id] || 'Ethics Journal Entry';
+                modalCaption.textContent = captions[id] || '';
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
             });
